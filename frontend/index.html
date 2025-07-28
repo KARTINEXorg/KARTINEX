@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kartinex - Your Own Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>Hey, User!</h3>
+            <span id="close-btn" class="close-btn">×</span>
+        </div>
+        <ul>
+            <li><a href="#">All Categories</a></li>
+            <li><a href="#">My Cart</a></li>
+            <li><a href="#">My Account</a></li>
+            <li><a href="#">My Notifications</a></li>
+            <hr>
+            <li><a href="#">More on Kartinex</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">About Us</a></li>
+        </ul>
+    </div>
+    <div id="overlay" class="overlay"></div>
+
+    <header class="header">
+        <div class="header-top-row">
+            <div class="left-section">
+                <div id="menu-icon" class="menu-icon">☰</div>
+                <!-- आपका स्टाइलिश टेक्स्ट लोगो -->
+                <div class="logo-text">KARTINEX</div>
+            </div>
+            <div class="right-section">
+                <button id="login-btn" class="login-btn">Login</button>
+                <!-- नया प्रोफेशनल कार्ट आइकॉन -->
+                <div id="cart-icon" class="cart-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom-row">
+            <div class="search-bar">
+                <input id="search-placeholder" type="text" placeholder="Search for products, brands and more">
+                <button id="search-btn">🔍</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- भाषा बदलने वाला ऑप्शन वापस आ गया है -->
+    <div class="language-selector">
+        <label for="language" id="lang-label">Language:</label>
+        <select id="language-switcher">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+        </select>
+    </div>
+
+    <main class="main-content">
+        <section class="categories">
+            <h2 id="all-categories-title">All Categories</h2>
+            <div class="category-grid">
+                <div class="category-item"><img src="https://placehold.co/100x100/EFEFEF/333333.png?text=Mobiles" alt="Mobiles"><p id="cat-mobiles">Mobiles</p></div>
+                <div class="category-item"><img src="https://placehold.co/100x100/EFEFEF/333333.png?text=Fashion" alt="Fashion"><p id="cat-fashion">Fashion</p></div>
+                <div class="category-item"><img src="https://placehold.co/100x100/EFEFEF/333333.png?text=Electronics" alt="Electronics"><p id="cat-electronics">Electronics</p></div>
+                <div class="category-item"><img src="https://placehold.co/100x100/EFEFEF/333333.png?text=Home" alt="Home"><p id="cat-home">Home</p></div>
+                <div class="category-item"><img src="https://placehold.co/100x100/EFEFEF/333333.png?text=Travel" alt="Travel"><p id="cat-travel">Travel</p></div>
+                <div class="category-item"><img src="https://placehold.co/100x100/EFEFEF/333333.png?text=Beauty" alt="Beauty"><p id="cat-beauty">Beauty</p></div>
+            </div>
+        </section>
+        <section class="banner">
+            <img src="https://placehold.co/600x150/333333/FFFFFF.png?text=Big+Freedom+Sale" alt="Promotional Banner">
+        </section>
+        <section class="products">
+            <h2 id="our-products-title">Trending Products</h2>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p id="footer-text">© 2025 Kartinex. All rights reserved.</p>
+    </footer>
+
+    <!-- ऑफलाइन पॉपअप वापस आ गया है -->
+    <div id="offline-popup" class="offline-popup">
+        <div class="offline-content">
+            <p id="offline-text">You are offline!</p>
+        </div>
+    </div>
+
+    <script src="lang.js"></script>
+</body>
+  </html>
