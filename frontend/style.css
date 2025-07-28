@@ -1,0 +1,46 @@
+/* बेसिक रीसेट */
+* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; margin: 0; padding: 0; background-color: #f1f3f6; transition: filter 0.3s ease; }
+
+/* ऑफलाइन मोड का स्टाइल वापस आ गया है */
+body.offline-mode { filter: grayscale(1); }
+.offline-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255,255,255,0.9); color: #333; justify-content: center; align-items: center; text-align: center; z-index: 1000; filter: grayscale(0); }
+.offline-popup.show { display: flex; }
+.offline-content p { font-size: 18px; font-weight: bold; }
+
+/* हेडर का प्रोफेशनल स्टाइल */
+.header { background-color: #2874f0; color: white; padding: 10px; }
+.header-top-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.left-section { display: flex; align-items: center; }
+.menu-icon { font-size: 24px; cursor: pointer; margin-right: 15px; }
+.logo-text { font-size: 24px; font-weight: bold; color: white; font-style: italic; }
+.right-section { display: flex; align-items: center; gap: 25px; }
+.login-btn { padding: 5px 20px; background-color: white; color: #2874f0; border: none; font-weight: bold; cursor: pointer; font-size: 14px; border-radius: 2px; }
+.cart-icon svg { color: white; }
+.search-bar { display: flex; }
+.search-bar input { width: 100%; padding: 10px 15px; border: none; border-radius: 2px; font-size: 14px; }
+.search-bar button { background: none; border: none; position: relative; right: 40px; font-size: 18px; color: #666; }
+
+/* भाषा बदलने वाले का स्टाइल */
+.language-selector { background-color: white; padding: 10px; text-align: right; border-bottom: 1px solid #ddd; font-size: 14px; }
+
+/* बाकी पेज का स्टाइल */
+.main-content { padding: 0 8px; }
+.categories { background-color: white; padding: 15px 5px; margin-bottom: 10px; text-align: center; border-radius: 4px; }
+.category-grid { display: flex; flex-wrap: wrap; justify-content: space-around; }
+.category-item { text-align: center; width: 80px; margin-bottom: 10px; }
+.category-item img { width: 60px; height: 60px; margin-bottom: 8px; border-radius: 50%; }
+.category-item p { font-size: 13px; font-weight: 500; color: #333; margin: 0; }
+.banner img { width: 100%; border-radius: 4px; display: block; margin-bottom: 10px;}
+.products { background-color: white; padding: 15px; border-radius: 4px; }
+.footer { text-align: center; padding: 20px; background-color: #172337; color: white; }
+
+/* साइडबार का स्टाइल */
+.sidebar { height: 100%; width: 280px; position: fixed; z-index: 20; top: 0; left: 0; background-color: #ffffff; transform: translateX(-100%); transition: transform 0.3s ease-in-out; box-shadow: 2px 0 5px rgba(0,0,0,0.2); }
+.sidebar.open { transform: translateX(0); }
+.sidebar-header { padding: 15px; background-color: #2874f0; color: white; display: flex; justify-content: space-between; align-items: center; }
+.close-btn { font-size: 30px; cursor: pointer; }
+.sidebar ul { list-style-type: none; padding: 0; margin: 0; }
+.sidebar ul li a { padding: 15px 20px; text-decoration: none; font-size: 16px; color: #333; display: block; border-bottom: 1px solid #f0f0f0; }
+.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 15; }
+.overlay.show { display: block; }
