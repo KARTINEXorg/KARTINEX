@@ -1,29 +1,25 @@
 const express = require('express');
-const mongoose = require('mongoose'); // Mongoose को बुला रहे हैं (डेटाबेस से बात करने के लिए)
+const mongoose = require('mongoose');
+const cors = require('cors'); // यह Frontend और Backend को बात करने की इजाज़त देगा
 const app = express();
 
-// यह हमारी सीक्रेट चाबी है, जो Render के Environment Variable से आएगी
+// --- Middlewares ---
+app.use(cors()); // CORS को इस्तेमाल करने के लिए
+app.use(express.json()); // सर्वर को JSON समझने के लिए
+
+// --- डेटाबेस कनेक्शन ---
 const MONGO_URI = process.env.MONGO_URI;
-
-// डेटाबेस से कनेक्ट करने की कोशिश
 mongoose.connect(MONGO_URI)
-  .then(() => {
-    // अगर कनेक्शन सफल हुआ तो यह मैसेज दिखेगा
-    console.log('MongoDB से सफलतापूर्वक जुड़ गया!');
-  })
-  .catch((err) => {
-    // अगर कोई एरर आया तो यह मैसेज दिखेगा
-    console.log('MongoDB से जुड़ने में एरर आया:', err);
-  });
+  .then(() => console.log('MongoDB से सफलतापूर्वक जुड़ गया!'))
+  .catch((err) => console.log('MongoDB से जुड़ने में एरर आया:', err));
 
-// यह हमारी वेबसाइट का मेन Backend लिंक है
+// --- Routes ---
 app.get('/', (req, res) => {
-    // अब हम नया सक्सेस मैसेज भेजेंगे
-    res.send('Kartinex का Backend इंजन सफलतापूर्वक चल रहा है और डेटाबेस से जुड़ गया है!');
+    res.send('KARTINEX का Backend इंजन अब असली काम के लिए तैयार है!');
 });
+// हमारे नए auth routes को इस्तेमाल करने के लिए
+app.use('/api/auth', require('./routes/auth'));
 
-// हमारे सर्वर को एक पोर्ट पर चलने के लिए कह रहे हैं
+// --- सर्वर स्टार्ट ---
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
