@@ -38,10 +38,50 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('offline', handleOffline);
 
     // --- पेज लोड होने पर चलने वाला कोड ---
-    // पहले चेक करो कि ऑफलाइन तो नहीं हो
     if (!navigator.onLine) { handleOffline(); }
-    // फिर भाषा सेट करो
     const savedLang = localStorage.getItem('language') || 'en';
     languageSwitcher.value = savedLang;
     setLanguage(savedLang);
+
+
+    // ======== हमारा नया टेस्टिंग सिस्टम का लॉजिक ========
+    const testBtn = document.getElementById('test-signup-btn');
+    const resultText = document.getElementById('test-result');
+
+    if (testBtn) { // यह चेक करना कि बटन मौजूद है
+        testBtn.addEventListener('click', async () => {
+            resultText.textContent = 'Sending Request...';
+            resultText.style.color = 'black';
+
+            const userData = {
+                name: "Website User",
+                email: "websiteuser" + Math.floor(Math.random() * 10000) + "@example.com",
+                phone: Math.random().toString().slice(2, 12),
+                password: "websitepassword"
+            };
+
+            try {
+                const response = await fetch('https://kartinex-backend.onrender.com/api/auth/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    resultText.textContent = 'Success! ' + (data.message || 'User created');
+                    resultText.style.color = 'green';
+                } else {
+                    resultText.textContent = 'Error: ' + (data.message || 'Unknown server error');
+                    resultText.style.color = 'red';
+                }
+
+            } catch (error) {
+                console.error('Fetch Error:', error);
+                resultText.textContent = 'Fatal Error! Could not connect to server.';
+                resultText.style.color = 'red';
+            }
+        });
+    }
 });
