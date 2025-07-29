@@ -1,11 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors'); // यह Frontend और Backend को बात करने की इजाज़त देगा
+const cors = require('cors');
+const path = require('path'); // <-- यह 'path' मॉड्यूल हमने नया जोड़ा है
 const app = express();
 
 // --- Middlewares ---
-app.use(cors()); // CORS को इस्तेमाल करने के लिए
-app.use(express.json()); // सर्वर को JSON समझने के लिए
+app.use(cors());
+app.use(express.json());
 
 // --- डेटाबेस कनेक्शन ---
 const MONGO_URI = process.env.MONGO_URI;
@@ -17,8 +18,11 @@ mongoose.connect(MONGO_URI)
 app.get('/', (req, res) => {
     res.send('KARTINEX का Backend इंजन अब असली काम के लिए तैयार है!');
 });
-// हमारे नए auth routes को इस्तेमाल करने के लिए
-app.use('/api/auth', require('./routes/auth'));
+
+// --- यहाँ बदलाव किया गया है ---
+// अब हम बिलकुल सही और पक्का रास्ता बता रहे हैं
+const authRoutes = require(path.join(__dirname, 'routes', 'auth'));
+app.use('/api/auth', authRoutes);
 
 // --- सर्वर स्टार्ट ---
 const PORT = process.env.PORT || 3000;
