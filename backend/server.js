@@ -1,21 +1,28 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const path = require('path');
 const app = express();
 
+// Init Middleware
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => res.send('Backend is Ready!'));
+// Connect to Database
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log('MongoDB Connected...');
+    } catch (err) {
+        console.error(err.message);
+        // Exit process with failure
+        process.exit(1);
+    }
+};
+connectDB();
 
-// सब कुछ छोटे अक्षरों में
-app.use('/api/auth', require('./routes/auth.js')); 
-
-const MONGO_URI = process.env.MONGO_URI;
-mongoose.connect(MONGO_URI)
-  .then(() => console.log('MongoDB Connected...'))
-  .catch(err => console.error(err.message));
+// Define Routes
+app.get('/', (req, res) => res.send('KARTINEX API Running... Ready for business!'));
+app.use('/api/auth', require('./routes/auth'));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
