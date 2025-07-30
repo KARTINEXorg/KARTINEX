@@ -43,43 +43,73 @@ document.addEventListener('DOMContentLoaded', () => {
     languageSwitcher.value = savedLang;
     setLanguage(savedLang);
 
-
-    // ======== हमारा नया टेस्टिंग सिस्टम का लॉजिक ========
-    const testBtn = document.getElementById('test-signup-btn');
+    // ======== Backend टेस्टिंग सिस्टम ========
     const resultText = document.getElementById('test-result');
 
-    if (testBtn) { // यह चेक करना कि बटन मौजूद है
-        testBtn.addEventListener('click', async () => {
-            resultText.textContent = 'Sending Request...';
+    // साइनअप टेस्टिंग
+    const signupBtn = document.getElementById('test-signup-btn');
+    if (signupBtn) {
+        signupBtn.addEventListener('click', async () => {
+            resultText.textContent = 'Sending Signup Request...';
             resultText.style.color = 'black';
-
             const userData = {
-                name: "Website User",
-                email: "websiteuser" + Math.floor(Math.random() * 10000) + "@example.com",
+                name: "Test Signup User",
+                email: "testsignup" + Math.floor(Math.random() * 10000) + "@example.com",
                 phone: Math.random().toString().slice(2, 12),
-                password: "websitepassword"
+                password: "testpassword"
             };
-
             try {
                 const response = await fetch('https://kartinex-backend.onrender.com/api/auth/signup', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(userData),
                 });
-
                 const data = await response.json();
-
                 if (response.ok) {
-                    resultText.textContent = 'Success! ' + (data.message || 'User created');
+                    resultText.textContent = 'Signup Success! User created. Now try logging in with this email: ' + userData.email;
                     resultText.style.color = 'green';
                 } else {
-                    resultText.textContent = 'Error: ' + (data.message || 'Unknown server error');
+                    resultText.textContent = 'Signup Error: ' + (data.msg || data.message || 'Unknown error');
                     resultText.style.color = 'red';
                 }
-
             } catch (error) {
-                console.error('Fetch Error:', error);
-                resultText.textContent = 'Fatal Error! Could not connect to server.';
+                resultText.textContent = 'Fatal Error! Could not connect.';
+                resultText.style.color = 'red';
+            }
+        });
+    }
+
+    // लॉगिन टेस्टिंग
+    const loginBtn = document.getElementById('test-login-btn');
+    if (loginBtn) {
+        loginBtn.addEventListener('click', async () => {
+            resultText.textContent = 'Sending Login Request...';
+            resultText.style.color = 'black';
+            
+            // बहुत ज़रूरी: यहाँ पर वह ईमेल और पासवर्ड डालो जिससे साइनअप सफल हुआ हो।
+            // तुम MongoDB Atlas में जाकर कोई भी एक ईमेल कॉपी कर सकते हो।
+            const loginData = {
+                email: "thewinner@example.com", // <-- इसे अपने सफल साइनअप वाले ईमेल से बदलो
+                password: "winnerpassword"     // <-- इसे उस यूज़र के पासवर्ड से बदलो
+            };
+
+            try {
+                const response = await fetch('https://kartinex-backend.onrender.com/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(loginData),
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    resultText.textContent = 'Login Success! Token Received!';
+                    console.log('Your Token:', data.token);
+                    resultText.style.color = 'blue';
+                } else {
+                    resultText.textContent = 'Login Error: ' + (data.msg || 'Invalid Credentials');
+                    resultText.style.color = 'red';
+                }
+            } catch (error) {
+                resultText.textContent = 'Fatal Error! Could not connect.';
                 resultText.style.color = 'red';
             }
         });
