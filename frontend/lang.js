@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: "Test Signup User",
                 email: "testsignup" + Math.floor(Math.random() * 10000) + "@example.com",
                 phone: Math.random().toString().slice(2, 12),
-                password: "testpassword"
+                password: "websitepassword" // <-- ध्यान दो, हम यह पासवर्ड इस्तेमाल करेंगे
             };
             try {
                 const response = await fetch('https://kartinex-backend.onrender.com/api/auth/signup', {
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 const data = await response.json();
                 if (response.ok) {
-                    resultText.textContent = 'Signup Success! User created. Now try logging in with this email: ' + userData.email;
+                    resultText.textContent = 'Signup Success! User created with email: ' + userData.email + '. Now test login.';
                     resultText.style.color = 'green';
                 } else {
                     resultText.textContent = 'Signup Error: ' + (data.msg || data.message || 'Unknown error');
@@ -86,11 +86,11 @@ document.addEventListener('DOMContentLoaded', () => {
             resultText.textContent = 'Sending Login Request...';
             resultText.style.color = 'black';
             
-            // बहुत ज़रूरी: यहाँ पर वह ईमेल और पासवर्ड डालो जिससे साइनअप सफल हुआ हो।
-            // तुम MongoDB Atlas में जाकर कोई भी एक ईमेल कॉपी कर सकते हो।
+            // --- यहाँ बदलाव किया गया है ---
+            // मैंने तुम्हारे स्क्रीनशॉट से पहले वाले यूज़र की डिटेल डाल दी है
             const loginData = {
-                email: "thewinner@example.com", // <-- इसे अपने सफल साइनअप वाले ईमेल से बदलो
-                password: "winnerpassword"     // <-- इसे उस यूज़र के पासवर्ड से बदलो
+                email: "websiteuser8430@example.com", 
+                password: "websitepassword" 
             };
 
             try {
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 if (response.ok) {
                     resultText.textContent = 'Login Success! Token Received!';
-                    console.log('Your Token:', data.token);
+                    console.log('Your Token:', data.token); // तुम ब्राउज़र के कंसोल में टोकन देख सकते हो
                     resultText.style.color = 'blue';
                 } else {
                     resultText.textContent = 'Login Error: ' + (data.msg || 'Invalid Credentials');
